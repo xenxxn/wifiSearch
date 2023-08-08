@@ -19,13 +19,20 @@
         <a href="bookmarkGroupAdd.jsp">추가test</a>
         <a href="bookmarkGroupEdit.jsp">수정test</a>
         <br><br>
-        <select name="bookmark">
-            <option value="">북마크 그룹 이름 선택</option>
-            <option value="학생">학생</option>
-            <option value="회사원">회사원</option>
-            <option value="기타">기타</option>
-        </select>
-        <button>북마크 추가하기</button>
+        <form action="bookmarkAdd" method="post">
+            <input type="hidden" name="WF_NAME" value="${wifi.getWF_NAME()}">
+            <input type="hidden" name="WF_BM_NAME" value="${wifi.getWF_NAME()}"> <!-- Add this line -->
+            <label for="bookmark">북마크 그룹 선택:</label>
+
+
+            <select name="bookmark" id="bookmark">
+                <option value="">북마크 그룹 이름 선택</option>
+                <c:forEach items="${bookmarkGroup}" var="bookmarkGroup">
+                    <option value="${bookmarkGroup.BG_NAME}">${bookmarkGroup.BG_NAME}</option>
+                </c:forEach>
+            </select>
+            <button type="submit">북마크 추가하기</button>
+        </form>
         <%
             if (request.getAttribute("wifi") == null) {
 //                out.println("<p>해당 wifi_id에 대한 정보를 찾을 수 없습니다.</p>");

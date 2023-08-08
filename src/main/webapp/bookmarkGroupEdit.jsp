@@ -1,3 +1,4 @@
+<%@ page import="com.zen.wifisearch.model.BookmarkGroup" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="resources/css/info.css" type="text/css">
@@ -16,21 +17,27 @@
         <a href="http://localhost:8080">북마크 보기</a> |
         <a href="confirm.jsp">북마크 그룹 관리</a>
         <br><br>
-            <form action="bookmarkGroupEdit" method="post">
-                <table id="wifi">
-                    <tbody>
-                    <tr>
-                        <td class="column">북마크 이름</td>
-                        <td><input type="text" name="updatedBG_NAME" value=""></td>
-                    </tr>
-                    <tr>
-                        <td class="column">순서</td>
-                        <td><input type="text" name="updatedBG_ORDER" value=""></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <input type="submit" value="수정">
-            </form>
-        <a href="../">돌아가기</a> | <button>수정</button>
+
+        <form action="bookmarkGroupEdit" method="post">
+            <table id="wifi">
+                <tbody>
+                <tr>
+                    <td class="column">북마크 ID</td>
+                    <td><input type="text" name="BG_ID" value="${bookmarkGroup.BG_ID}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="column">북마크 이름</td>
+                    <td><input type="text" name="BG_NAME" value="${bookmarkGroup.BG_NAME}"></td>
+                </tr>
+                <tr>
+                    <td class="column">순서</td>
+                    <td><input type="text" name="BG_ORDER" value="${bookmarkGroup.BG_ORDER}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="../">돌아가기</a> | <button type="submit">수정</button>
+        </form>
+
+
     </body>
 </html>

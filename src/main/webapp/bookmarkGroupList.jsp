@@ -9,6 +9,7 @@
     <title>와이파이 정보 구하기</title>
 </head>
     <body>
+        <button type="button" onclick="goToBookmarkGroupAdd()"></button>
         <table id="wifi">
             <thead>
             <tr>
@@ -28,10 +29,15 @@
                         <td>${bookmarkList.BG_ORDER}</td>
                         <td>${bookmarkList.BG_RG_DATE}</td>
                         <td>${bookmarkList.BG_MD_DATE}</td>
-                        <td><a href="bookmarkGroupEdit.jsp">수정</a> <a href="http://localhost:8080/bookmarkGroupDelete">삭제</a></td>
+                        <td><a href="bookmarkGroupEdit?BG_ID=${bookmarkList.BG_ID}">수정</a><a href="bookmarkGroupDelete?BG_ID=${bookmarkList.BG_ID}">삭제</a></td>
                     </tr>
             </c:forEach>
             </tbody>
         </table>
     </body>
 </html>
+<script>
+    function goToBookmarkGroupAdd() {
+        window.location.href = "bookmarkGroupAdd.jsp"; // 페이지 이동
+    }
+</script>

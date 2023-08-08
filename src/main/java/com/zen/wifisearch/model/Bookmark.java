@@ -14,8 +14,7 @@ import java.util.Date;
 @ToString
 public class Bookmark {
     private int BM_ID;
-    private String BM_NAME;
-    private int BM_ORDER;
+    private String BG_BM_NAME; //북마크그룹 FK
+    private String WF_BM_NAME; // 와이파이 FK
     private Date BM_RG_DATE;
-    private Date BM_MD_DATE;
 }

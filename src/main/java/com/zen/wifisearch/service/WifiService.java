@@ -222,4 +222,27 @@ public class WifiService {
         }
         return wifi;
     }
+
+    public static String getWifiName(String WF_ID) throws SQLException {
+        Connection conn = null;
+        String WF_NAME = null;
+        String selectQuery = "SELECT WF_NAME FROM wifi WHERE WF_ID = ?";
+        try{
+            conn = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(selectQuery);
+            pstmt.setString(1, WF_ID);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                WF_NAME = rs.getString("WF_NAME");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return WF_NAME;
+    }
 }

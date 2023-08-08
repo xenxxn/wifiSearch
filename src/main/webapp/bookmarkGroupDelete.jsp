@@ -17,18 +17,33 @@
     <a href="http://localhost:8080">북마크 보기</a> |
     <a href="confirm.jsp">북마크 그룹 관리</a>
     <br><br>
-        <table id = "wifi">
-            <tbody>
-            <tr>
-                <td class="column">북마크 이름</td>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <td class="column">순서</td>
-                <td><input type="text"></td>
-            </tr>
-            </tbody>
-        </table>
-        <a href="../">돌아가기</a> | <button>삭제</button>
+        <form action="bookmarkGroupDelete" method="post" onsubmit="return confirmDelete();">
+            <table id="wifi">
+                <tbody>
+                <tr>
+                    <td class="column">북마크 ID</td>
+                    <td><input type="text" name="BG_ID" value="${bookmarkGroup.BG_ID}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="column">북마크 이름</td>
+                    <td><input type="text" name="BG_NAME" value="${bookmarkGroup.BG_NAME}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="column">순서</td>
+                    <td><input type="text" name="BG_ORDER" value="${bookmarkGroup.BG_ORDER}" readonly></td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="../">돌아가기</a> | <button type="submit">삭제</button>
+        </form>
     </body>
 </html>
+<script>
+    function confirmDelete() {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
