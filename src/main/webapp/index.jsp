@@ -171,6 +171,6 @@
         var additionalLinksDiv = document.getElementById("additionalLinks");
         additionalLinksDiv.style.display = "" +
             "";
-        // 추가적인 동작이 필요하다면 여기에 추가
+
     });
 </script>

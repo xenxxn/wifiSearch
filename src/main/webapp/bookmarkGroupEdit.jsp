@@ -34,7 +34,9 @@
                 </tr>
                 </tbody>
             </table>
-            <a href="../">돌아가기</a> | <button type="submit">수정</button>
+            <div style="text-align: center; display: block;">
+                <a href="../">돌아가기</a> | <button type="submit">수정</button>
+            </div>
         </form>
 
 

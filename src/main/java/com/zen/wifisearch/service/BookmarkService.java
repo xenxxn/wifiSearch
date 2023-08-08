@@ -3,8 +3,10 @@ package com.zen.wifisearch.service;
 import com.zen.wifisearch.DatabaseConnector;
 import com.zen.wifisearch.model.Bookmark;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BookmarkService {
@@ -80,6 +82,37 @@ public class BookmarkService {
                 conn.close();
             }
         }
+    }
+
+    public static Bookmark getBookmarkInfo(int BM_ID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Bookmark bookmark = null;
+        String selectQuery = "SELECT BG_BM_NAME, WF_BM_NAME,BM_RG_DATE FROM BOOKMARK WHERE BM_ID = ?";
+        try{
+            conn = DatabaseConnector.getConnection();
+            pstmt = conn.prepareStatement(selectQuery);
+            pstmt.setInt(1, BM_ID);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()){
+                bookmark = new Bookmark();
+                bookmark.setBG_BM_NAME(rs.getString("BG_BM_NAME"));
+                bookmark.setWF_BM_NAME(rs.getString("WF_BM_NAME"));
+                Timestamp rgTimestamp = rs.getTimestamp("BM_RG_DATE");
+                if (rgTimestamp != null) {
+                    bookmark.setBM_RG_DATE(rgTimestamp);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return bookmark;
     }
 }
 
