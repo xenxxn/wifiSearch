@@ -13,9 +13,9 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class Bookmark {
-    private int bmId;
-    private String bmName;
-    private int bmOrder;
-    private Date bmRgDate;
-    private Date bmMdDate;
+    private int BM_ID;
+    private String BM_NAME;
+    private int BM_ORDER;
+    private Date BM_RG_DATE;
+    private Date BM_MD_DATE;
 }

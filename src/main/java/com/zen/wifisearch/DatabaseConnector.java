@@ -1,10 +1,5 @@
 package com.zen.wifisearch;
 
-
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -45,7 +40,7 @@ public class DatabaseConnector {
     public static void main(String[] args) throws IOException {
         DatabaseConnector connector = new DatabaseConnector();
         Connection conn = connector.getConnection();
-//        connector.closeConnection(conn);
+        connector.closeConnection(conn);
     }
 }
 

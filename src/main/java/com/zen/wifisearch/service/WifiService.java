@@ -140,6 +140,7 @@ public class WifiService {
             PreparedStatement pstmt = conn.prepareStatement(nearSelectSql);
             pstmt.setDouble(1, latitude);
             pstmt.setDouble(2, longitude);
+
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Wifi wifi = new Wifi();
@@ -159,6 +160,9 @@ public class WifiService {
                 wifi.setWF_Y(rs.getDouble("WF_Y"));
                 wifi.setWF_X(rs.getDouble("WF_X"));
                 wifi.setWF_WORK_DATE(rs.getString("WF_WORK_DATE"));
+                double distanceOrg = rs.getDouble("distance");
+                double distance = distanceOrg / 1000.0;
+                wifi.setDistance(distance);
                 nearbyWifiData.add(wifi);
             }
         } catch (SQLException e) {
@@ -171,4 +175,51 @@ public class WifiService {
         return nearbyWifiData;
     }
 
+    public static Wifi wifiInfo(String wifi_id) {
+        Wifi wifi = new Wifi();
+        String selectSql = "select * from wifi where wf_id = ?";
+        Connection conn = null;
+        try {
+            conn = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(selectSql);
+            pstmt.setString(1, wifi_id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                wifi.setWF_ID(rs.getString("WF_ID"));
+                wifi.setWF_BOROUGH(rs.getString("WF_BOROUGH"));
+                wifi.setWF_NAME(rs.getString("WF_NAME"));
+                wifi.setWF_ST_ADDR(rs.getString("WF_ST_ADDR"));
+                wifi.setWF_DT_ADDR(rs.getString("WF_DT_ADDR"));
+                wifi.setWF_FLOOR(rs.getString("WF_FLOOR"));
+                wifi.setWF_INST_TYPE(rs.getString("WF_INST_TYPE"));
+                wifi.setWF_INST_ORGN(rs.getString("WF_INST_ORGN"));
+                wifi.setWF_SERVICE(rs.getString("WF_SERVICE"));
+                wifi.setWF_NT_TYPE(rs.getString("WF_NT_TYPE"));
+                wifi.setWF_YEAR(rs.getInt("WF_YEAR"));
+                wifi.setWF_INOUT(rs.getString("WF_INOUT"));
+                wifi.setWF_ENVIRONMENT(rs.getString("WF_ENVIRONMENT"));
+                wifi.setWF_Y(rs.getDouble("WF_Y"));
+                wifi.setWF_X(rs.getDouble("WF_X"));
+                wifi.setWF_WORK_DATE(rs.getString("WF_WORK_DATE"));
+            } else {
+                // 해당 wifi_id에 해당하는 데이터가 없을 경우
+                wifi = null;
+            }
+        } catch (SQLException e) {
+            // 예외 처리: 로깅 또는 에러 페이지 리디렉션 등을 수행할 수 있음
+            e.printStackTrace();
+            // 예외 상황을 호출한 쪽에 알려주기 위해 null을 리턴
+            wifi = null;
+        } finally {
+            // 리소스 해제
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return wifi;
+    }
 }

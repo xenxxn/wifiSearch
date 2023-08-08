@@ -27,4 +27,5 @@ public class Wifi {
     private double WF_Y;//y좌표
     private double WF_X; //x좌표
     private String WF_WORK_DATE;//작업일자
+    private double distance; // 거리구하기 위한 변수
 }

@@ -145,12 +145,5 @@ public class WifiAPI {
         }
         return (JSONArray) new JSONParser().parse(sb.toString());
     }
-
-    public static JSONArray showNearWifiData(double wfX, double wfY){
-        //가장 가까운 20개 데이터
-        //쿼리로 데이터베이스에서 데이터를 가져와야함
-
-        return null;
-    }
 }
 

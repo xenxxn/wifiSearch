@@ -13,9 +13,9 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class History {
-    private int htId;
-    private double htX;
-    private double htY;
-    private Date htDate;
+    private int HT_ID;
+    private double HT_X;
+    private double HT_Y;
+    private Date HT_DATE;
 }
 

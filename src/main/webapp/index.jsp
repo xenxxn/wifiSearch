@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link rel="stylesheet" href="resources/css/table.css" type="text/css">
+<link rel="stylesheet" href="resources/css/index.css" type="text/css">
 <html>
     <head>
         <script type="text/javascript" src="resources/js/getLocation.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <title>Title</title>
+        <title>와이파이 정보 구하기</title>
     </head>
     <body>
         <h1>와이파이 정보 구하기</h1>
@@ -14,6 +14,10 @@
         <a href="http://localhost:8080">위치</a> |
         <a href="http://localhost:8080">히스토리 목록</a> |
         <a href="confirm.jsp">OPEN API 와이파이 정보 가져오기</a>
+        <div id = "additionalLinks">
+            <a href="http://localhost:8080">북마크 보기</a> |
+            <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
+        </div>
         <br>
 
             LAT : <input type="text" id="latitude" name="latitude"> ,
@@ -82,57 +86,78 @@
                 if(data.length > 0){
                     for(let i = 0; i < data.length; i++){
                         const newRow0 = wifi_Tbody.insertRow();
-                        const newCell0 = newRow0.insertCell();
-                        const newText0 = document.createTextNode("NULL");
-                        newCell0.appendChild(newText0);
-                        const newCell1 = newRow0.insertCell();
-                        const newText1 = document.createTextNode(data[i].WF_ID);
-                        newCell1.appendChild(newText1);
-                        const newCell2 = newRow0.insertCell();
-                        const newText2 = document.createTextNode(data[i].WF_BOROUGH);
-                        newCell2.appendChild(newText2);
-                        const newCell3 = newRow0.insertCell();
-                        const newText3 = document.createTextNode(data[i].WF_NAME);
-                        newCell3.appendChild(newText3);
-                        const newCell4 = newRow0.insertCell();
-                        const newText4 = document.createTextNode(data[i].WF_ST_ADDR);
-                        newCell4.appendChild(newText4);
-                        const newCell5 = newRow0.insertCell();
-                        const newText5 = document.createTextNode(data[i].WF_DT_ADDR);
-                        newCell5.appendChild(newText5);
-                        const newCell6 = newRow0.insertCell();
-                        const newText6 = document.createTextNode(data[i].WF_FLOOR);
-                        newCell6.appendChild(newText6);
-                        const newCell7 = newRow0.insertCell();
-                        const newText7 = document.createTextNode(data[i].WF_INST_TYPE);
-                        newCell7.appendChild(newText7);
-                        const newCell8 = newRow0.insertCell();
-                        const newText8 = document.createTextNode(data[i].WF_INST_ORGN);
-                        newCell8.appendChild(newText8);
-                        const newCell9 = newRow0.insertCell();
-                        const newText9 = document.createTextNode(data[i].WF_SERVICE);
-                        newCell9.appendChild(newText9);
-                        const newCell10 = newRow0.insertCell();
-                        const newText10 = document.createTextNode(data[i].WF_NT_TYPE);
-                        newCell10.appendChild(newText10);
-                        const newCell11 = newRow0.insertCell();
-                        const newText11 = document.createTextNode(data[i].WF_YEAR);
-                        newCell11.appendChild(newText11);
-                        const newCell12 = newRow0.insertCell();
-                        const newText12 = document.createTextNode(data[i].WF_INOUT);
-                        newCell12.appendChild(newText12);
-                        const newCell13 = newRow0.insertCell();
-                        const newText13 = document.createTextNode(data[i].WF_ENVIRONMENT);
-                        newCell13.appendChild(newText13);
-                        const newCell14 = newRow0.insertCell();
-                        const newText14 = document.createTextNode(data[i].WF_Y);
-                        newCell14.appendChild(newText14);
-                        const newCell15 = newRow0.insertCell();
-                        const newText15 = document.createTextNode(data[i].WF_X);
-                        newCell15.appendChild(newText15);
-                        const newCell16 = newRow0.insertCell();
-                        const newText16 = document.createTextNode(data[i].WF_WORK_DATE);
-                        newCell16.appendChild(newText16);
+
+                        const distance_tr = newRow0.insertCell();
+                        const distance_td = document.createTextNode(data[i].distance);
+                        distance_tr.appendChild(distance_td);
+
+                        const wifi_id_tr = newRow0.insertCell();
+                        const wifi_id_td = document.createTextNode(data[i].WF_ID);
+                        wifi_id_tr.appendChild(wifi_id_td);
+
+                        const wifi_borough_tr = newRow0.insertCell();
+                        const wifi_borough_td = document.createTextNode(data[i].WF_BOROUGH);
+                        wifi_borough_tr.appendChild(wifi_borough_td);
+
+                        //동적테이블에 해당 와이파이 info.jsp로 이동하는 링크 걸기
+                        const wifi_name_tr = newRow0.insertCell();
+                        const wifi_name_link = document.createElement("a");
+                        const wifi_id = data[i].WF_ID;
+                        wifi_name_link.href = "http://localhost:8080/info?wifi_id=" + wifi_id; // wifi_id를 쿼리 파라미터로 추가
+                        wifi_name_link.textContent = data[i].WF_NAME;
+                        wifi_name_tr.appendChild(wifi_name_link);
+
+                        const wifi_addr1_tr = newRow0.insertCell();
+                        const wifi_addr1_td = document.createTextNode(data[i].WF_ST_ADDR);
+                        wifi_addr1_tr.appendChild(wifi_addr1_td);
+
+                        const wifi_addr2_tr = newRow0.insertCell();
+                        const wifi_addr2_td = document.createTextNode(data[i].WF_DT_ADDR);
+                        wifi_addr2_tr.appendChild(wifi_addr2_td);
+
+                        const wifi_floor_tr = newRow0.insertCell();
+                        const wifi_floor_td = document.createTextNode(data[i].WF_FLOOR);
+                        wifi_floor_tr.appendChild(wifi_floor_td);
+
+                        const wifi_inst_type_tr = newRow0.insertCell();
+                        const wifi_inst_type_td = document.createTextNode(data[i].WF_INST_TYPE);
+                        wifi_inst_type_tr.appendChild(wifi_inst_type_td);
+
+                        const wifi_inst_orgn_tr = newRow0.insertCell();
+                        const wifi_inst_orgn_td = document.createTextNode(data[i].WF_INST_ORGN);
+                        wifi_inst_orgn_tr.appendChild(wifi_inst_orgn_td);
+
+                        const wifi_service_tr = newRow0.insertCell();
+                        const wifi_service_td = document.createTextNode(data[i].WF_SERVICE);
+                        wifi_service_tr.appendChild(wifi_service_td);
+
+                        const wifi_nt_type_tr = newRow0.insertCell();
+                        const wifi_nt_type_td = document.createTextNode(data[i].WF_NT_TYPE);
+                        wifi_nt_type_tr.appendChild(wifi_nt_type_td);
+
+                        const wifi_year_tr = newRow0.insertCell();
+                        const wifi_year_td = document.createTextNode(data[i].WF_YEAR);
+                        wifi_year_tr.appendChild(wifi_year_td);
+
+                        const wifi_inout_tr = newRow0.insertCell();
+                        const wifi_inout_td = document.createTextNode(data[i].WF_INOUT);
+                        wifi_inout_tr.appendChild(wifi_inout_td);
+
+                        const wifi_environment_tr = newRow0.insertCell();
+                        const wifi_environment_td = document.createTextNode(data[i].WF_ENVIRONMENT);
+                        wifi_environment_tr.appendChild(wifi_environment_td);
+
+                        const wifi_y_tr = newRow0.insertCell();
+                        const wifi_y_td = document.createTextNode(data[i].WF_Y);
+                        wifi_y_tr.appendChild(wifi_y_td);
+
+                        const wifi_x_tr = newRow0.insertCell();
+                        const wifi_x_td = document.createTextNode(data[i].WF_X);
+                        wifi_x_tr.appendChild(wifi_x_td);
+
+                        const wifi_work_date_tr = newRow0.insertCell();
+                        const wifi_work_date_td = document.createTextNode(data[i].WF_WORK_DATE);
+                        wifi_work_date_tr.appendChild(wifi_work_date_td);
                     }
                 }else{
 
@@ -142,5 +167,11 @@
                 console.error(error);
             }
         });
+    });
+    document.getElementById("btn_getWifiData").addEventListener("click", function() {
+        var additionalLinksDiv = document.getElementById("additionalLinks");
+        additionalLinksDiv.style.display = "" +
+            "";
+        // 추가적인 동작이 필요하다면 여기에 추가
     });
 </script>

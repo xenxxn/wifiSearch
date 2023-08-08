@@ -4,7 +4,6 @@ import com.zen.wifisearch.model.Wifi;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +33,7 @@ public class NearByWifiDataServlet extends HttpServlet {
         for (Wifi wifi : nearbyWifiData) {
             JSONObject jsonObject = new JSONObject();
             try {
+                jsonObject.put("distance", wifi.getDistance());
                 jsonObject.put("WF_ID", wifi.getWF_ID());
                 jsonObject.put("WF_BOROUGH", wifi.getWF_BOROUGH());
                 jsonObject.put("WF_NAME", wifi.getWF_NAME());
