@@ -1,6 +1,5 @@
 package com.zen.wifisearch.servlet;
 
-import com.zen.wifisearch.service.BookmarkGroupService;
 import com.zen.wifisearch.service.BookmarkService;
 
 import javax.servlet.RequestDispatcher;
@@ -21,9 +20,7 @@ public class BookmarkAddServlet extends HttpServlet {
             String BG_BM_NAME = request.getParameter("bookmark");
             String WF_BM_NAME = request.getParameter("WF_NAME");
             BookmarkService.insertBookmark(BG_BM_NAME, WF_BM_NAME);
-            System.out.println("성공");
         } catch (SQLException e) {
-            System.out.println("실패");
             throw new RuntimeException(e);
         }
 

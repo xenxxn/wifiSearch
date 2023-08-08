@@ -46,11 +46,7 @@ public class BookmarkGroupService {
             throw new RuntimeException(e);
         }finally {
             if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                conn.close();
             }
         }
     }
@@ -104,7 +100,6 @@ public class BookmarkGroupService {
                 bookmarkGroup.setBG_NAME(rs.getString("BG_NAME"));
                 bookmarkGroup.setBG_ORDER(rs.getInt("BG_ORDER"));
             }
-            System.out.println(bookmarkGroup);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

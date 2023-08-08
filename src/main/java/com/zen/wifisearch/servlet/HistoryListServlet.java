@@ -1,7 +1,7 @@
 package com.zen.wifisearch.servlet;
 
-import com.zen.wifisearch.model.Bookmark;
-import com.zen.wifisearch.service.BookmarkService;
+import com.zen.wifisearch.model.History;
+import com.zen.wifisearch.service.HistoryService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +12,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/bookmarkList")
-public class BookmarkListServlet extends HttpServlet {
+@WebServlet("/history")
+public class HistoryListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Bookmark> bookmarkList = null;
+        List<History> historyList = null;
         try {
-            bookmarkList = BookmarkService.bookmarkList();
+            historyList = HistoryService.historyList();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         response.setContentType("text/html; charset=UTF-8");
-        request.setAttribute("bookmarkList", bookmarkList);
-        request.getRequestDispatcher("bookmarkList.jsp").forward(request, response);
+        request.setAttribute("historyList", historyList);
+        request.getRequestDispatcher("history.jsp").forward(request, response);
     }
 }

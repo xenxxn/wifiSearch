@@ -245,4 +245,46 @@ public class WifiService {
         }
         return WF_NAME;
     }
+    public static double getWifiX(String WF_ID) throws SQLException {
+        Connection conn = null;
+        double x = 0;
+        String selectQuery = "SELECT WF_X FROM wifi WHERE WF_ID = ?";
+        try{
+            conn = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(selectQuery);
+            pstmt.setString(1, WF_ID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                x = rs.getDouble("WF_X");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null){
+                conn.close();
+            }
+        }
+        return x;
+    }
+    public static double getWifiY(String WF_ID) throws SQLException {
+        Connection conn = null;
+        double y = 0;
+        String selectQuery = "SELECT WF_Y FROM wifi WHERE WF_ID = ?";
+        try{
+            conn = DatabaseConnector.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(selectQuery);
+            pstmt.setString(1, WF_ID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()){
+                y = rs.getDouble("WF_Y");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null){
+                conn.close();
+            }
+        }
+        return y;
+    }
 }

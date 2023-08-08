@@ -65,7 +65,7 @@ public class BookmarkService {
     }
 
     public static void deleteBookmark(int BM_ID) throws SQLException {
-        String deleteQuery = "DELETE FROM bookmark WHERE BM_ID = ?";
+        String deleteQuery = "DELETE FROM BOOKMARK WHERE BM_ID = ?";
         Connection conn = null;
         try{
             conn = DatabaseConnector.getConnection();
@@ -89,7 +89,7 @@ public class BookmarkService {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Bookmark bookmark = null;
-        String selectQuery = "SELECT BG_BM_NAME, WF_BM_NAME,BM_RG_DATE FROM BOOKMARK WHERE BM_ID = ?";
+        String selectQuery = "SELECT BM_ID, BG_BM_NAME, WF_BM_NAME,BM_RG_DATE FROM BOOKMARK WHERE BM_ID = ?";
         try{
             conn = DatabaseConnector.getConnection();
             pstmt = conn.prepareStatement(selectQuery);
@@ -98,6 +98,7 @@ public class BookmarkService {
 
             if (rs.next()){
                 bookmark = new Bookmark();
+                bookmark.setBM_ID(BM_ID);
                 bookmark.setBG_BM_NAME(rs.getString("BG_BM_NAME"));
                 bookmark.setWF_BM_NAME(rs.getString("WF_BM_NAME"));
                 Timestamp rgTimestamp = rs.getTimestamp("BM_RG_DATE");
@@ -108,6 +109,12 @@ public class BookmarkService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
             if (conn != null) {
                 conn.close();
             }

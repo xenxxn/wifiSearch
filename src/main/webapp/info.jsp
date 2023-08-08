@@ -6,12 +6,13 @@
     <head>
         <script type="text/javascript" src="resources/js/getLocation.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
         <title>Title</title>
     </head>
     <body>
         <h1>와이파이 정보 구하기</h1>
         <a href="http://localhost:8080">홈</a> |
-        <a href="http://localhost:8080">위치 히스토리 목록</a> |
+        <a href="http://localhost:8080/history">위치 히스토리 목록</a> |
         <a href="confirm.jsp">OPEN API 와이파이 정보 가져오기</a>
         <a href="http://localhost:8080/bookmarkList">북마크 보기</a> |
         <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
@@ -112,6 +113,23 @@
         </table>
     </body>
 </html>
+<script>
+    // wifi 정보 추출
+    var wifiInfo = {
+        xCoordinate: '<%= wifi.getWF_X() %>',
+        yCoordinate: '<%= wifi.getWF_Y() %>',
+        wifiId: '<%= wifi.getWF_ID() %>'
+    };
+
+    // 쿠키 설정
+    document.cookie = `xCoordinate=${wifiInfo.xCoordinate};`;
+    document.cookie = `yCoordinate=${wifiInfo.yCoordinate};`;
+    document.cookie = `wifiId=${wifiInfo.wifiId};`;
+
+    // 서버로 페이지 요청
+    window.onload = "http://localhost:8080/history"; // 혹은 다른 URL
+
+</script>
 <%
     }
 %>

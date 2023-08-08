@@ -12,7 +12,7 @@
 <h1>와이파이 정보 구하기</h1>
 <a href="http://localhost:8080">홈</a> |
 <a href="http://localhost:8080">위치</a> |
-<a href="http://localhost:8080">히스토리 목록</a> |
+<a href="http://localhost:8080/history">히스토리 목록</a> |
 <a href="confirm.jsp">OPEN API 와이파이 정보 가져오기</a>
 <br>
 

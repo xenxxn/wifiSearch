@@ -18,6 +18,8 @@ function showPosition(position) {
 
     // 근처 WiFi 정보 가져오기 버튼 활성화
     $('#getNearbyWifiBtn').prop('disabled', false);
+
+    sendLocation(latitude, longitude);
 }
 
 // 위치 정보 가져오기 실패 시 실행되는 함수
@@ -37,13 +39,11 @@ function showError(error) {
             break;
     }
 }
-function sendLocation() {
-    var latitude = parseFloat($("#latitude").val());
-    var longitude = parseFloat($("#longitude").val());
+function sendLocation(latitude, longitude) {
     var baseUrl = "http://localhost:8080/";
     $.ajax({
         type: "POST",
-        url: baseUrl + "nearByWifiData",
+        url: baseUrl + "historyAdd",
         data: {
             latitude: latitude,
             longitude: longitude
@@ -56,34 +56,3 @@ function sendLocation() {
         }
     });
 }
-// $('#getNearbyWifiBtn').on('click', function () {
-//     // 서버로 근처 WiFi 정보 요청
-//     $.ajax({
-//         url: '/getNearbyWifi', // 서버에서 해당 URL에 대한 요청을 처리하는 메서드 필요
-//         method: 'GET',
-//         dataType: 'json',
-//         success: function (data) {
-//             // 요청에 성공하면 서버로부터 받은 데이터를 서버에 INSERT
-//             insertNearbyWifiToServer(data); // 응답 데이터를 인자로 전달
-//         },
-//         error: function () {
-//             alert('근처 WiFi 정보를 가져오는데 실패했습니다.');
-//         }
-//     });
-// });
-//
-// // 서버에 근처 WiFi 정보를 INSERT하는 함수
-// function insertNearbyWifiToServer(data) {
-//     $.ajax({
-//         url: '/insertNearbyWifi', // 서버에서 해당 URL에 대한 INSERT 기능을 구현해야 함
-//         method: 'POST',
-//         contentType: 'application/json',
-//         data: JSON.stringify(data),
-//         success: function () {
-//             alert('근처 WiFi 정보를 성공적으로 저장했습니다.');
-//         },
-//         error: function () {
-//             alert('근처 WiFi 정보를 저장하는데 실패했습니다.');
-//         }
-//     });
-// }

@@ -18,13 +18,11 @@ import java.sql.SQLException;
 public class BookmarkDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String bmIdParam = request.getParameter("BM_ID");
-        System.out.println(bmIdParam);
         if (bmIdParam != null) {
             int BM_ID = Integer.parseInt(bmIdParam);
             try {
                 Bookmark bookmark = BookmarkService.getBookmarkInfo(BM_ID); // 해당 ID의 정보를 가져오는 메소드를 가정
                 request.setAttribute("bookmark", bookmark);
-                request.setAttribute("BM_ID", BM_ID);
             } catch (SQLException e) {
                 e.printStackTrace();
 
