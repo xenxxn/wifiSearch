@@ -32,7 +32,7 @@ public class BookmarkService {
         }
     }
 
-    public List<Bookmark> bookmarkList() throws SQLException {
+    public static List<Bookmark> bookmarkList() throws SQLException {
         List<Bookmark> bookmarkList = new ArrayList<>();
         String selectQuery = "SELECT * FROM BOOKMARK";
         Connection conn = null;
@@ -62,15 +62,23 @@ public class BookmarkService {
         return bookmarkList;
     }
 
-    public static void deleteBookmark(int BG_BM_ID){
-        String deleteQuery = "DELETE FROM bookmark WHERE BG_BM_ID = ?";
+    public static void deleteBookmark(int BM_ID) throws SQLException {
+        String deleteQuery = "DELETE FROM bookmark WHERE BM_ID = ?";
         Connection conn = null;
         try{
             conn = DatabaseConnector.getConnection();
+            conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement(deleteQuery);
-
+            pstmt.setInt(1, BM_ID);
+            pstmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
+            conn.rollback();
             throw new RuntimeException(e);
+        }finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
 }

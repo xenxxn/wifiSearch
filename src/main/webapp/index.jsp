@@ -11,11 +11,10 @@
     <body>
         <h1>와이파이 정보 구하기</h1>
         <a href="http://localhost:8080">홈</a> |
-        <a href="http://localhost:8080">위치</a> |
-        <a href="http://localhost:8080">히스토리 목록</a> |
+        <a href="http://localhost:8080">위치 히스토리 목록</a> |
         <a href="confirm.jsp">OPEN API 와이파이 정보 가져오기</a>
         <div id = "additionalLinks">
-            <a href="http://localhost:8080">북마크 보기</a> |
+            <a href="http://localhost:8080/bookmarkList">북마크 보기</a> |
             <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
         </div>
         <br>

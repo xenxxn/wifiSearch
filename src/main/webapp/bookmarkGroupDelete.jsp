@@ -11,11 +11,10 @@
     <body>
     <h1>북마크 그룹 수정</h1>
     <a href="http://localhost:8080">홈</a> |
-    <a href="http://localhost:8080">위치</a> |
-    <a href="http://localhost:8080">히스토리 목록</a> |
+    <a href="http://localhost:8080">위치 히스토리 목록</a> |
     <a href="confirm.jsp">OPEN API 와이파이 정보 가져오기</a>
-    <a href="http://localhost:8080">북마크 보기</a> |
-    <a href="confirm.jsp">북마크 그룹 관리</a>
+    <a href="http://localhost:8080/bookmarkList">북마크 보기</a> |
+    <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
     <br><br>
         <form action="bookmarkGroupDelete" method="post" onsubmit="return confirmDelete();">
             <table id="wifi">
@@ -34,7 +33,11 @@
                 </tr>
                 </tbody>
             </table>
-            <a href="../">돌아가기</a> | <button type="submit">삭제</button>
+            <br>
+            <div style="text-align: center; display: block;">
+                <a href="../">돌아가기</a> | <button type="submit">삭제</button>
+            </div>
+
         </form>
     </body>
 </html>
