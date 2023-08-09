@@ -18,8 +18,8 @@
             <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
         </div>
         <br>
-            LAT : <input type="text" id="longitude" name="longitude"> ,
-            LNT : <input type="text" id="latitude" name="latitude">
+            LAT : <input type="text" id="latitude" name="latitude"> ,
+            LNT : <input type="text" id="longitude" name="longitude">
             <button id="getLocationBtn">내 위치 가져오기</button>
             <button type="button" id="btn_getWifiData">근처 wifi 정보 가져오기</button>
         <table id="wifi">
@@ -143,13 +143,13 @@
                         const wifi_environment_td = document.createTextNode(data[i].WF_ENVIRONMENT);
                         wifi_environment_tr.appendChild(wifi_environment_td);
 
-                        const wifi_y_tr = newRow0.insertCell();
-                        const wifi_y_td = document.createTextNode(data[i].WF_Y);
-                        wifi_y_tr.appendChild(wifi_y_td);
-
                         const wifi_x_tr = newRow0.insertCell();
                         const wifi_x_td = document.createTextNode(data[i].WF_X);
                         wifi_x_tr.appendChild(wifi_x_td);
+
+                        const wifi_y_tr = newRow0.insertCell();
+                        const wifi_y_td = document.createTextNode(data[i].WF_Y);
+                        wifi_y_tr.appendChild(wifi_y_td);
 
                         const wifi_work_date_tr = newRow0.insertCell();
                         const wifi_work_date_td = document.createTextNode(data[i].WF_WORK_DATE);

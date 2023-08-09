@@ -10,13 +10,13 @@ import java.util.List;
 public class HistoryService {
     public static void insertHistory(double longitude, double latitude) throws SQLException {
         Connection conn = null;
-
+        PreparedStatement pstmt = null;
         String insertQuery = "INSERT INTO HISTORY (HT_X, HT_Y, HT_DATE) VALUES (?, ?, CURRENT_TIMESTAMP)";
 
         try{
             conn = DatabaseConnector.getConnection();
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement(insertQuery);
+            pstmt = conn.prepareStatement(insertQuery);
             pstmt.setDouble(1, longitude);
             pstmt.setDouble(2, latitude);
             pstmt.executeUpdate();
@@ -25,6 +25,9 @@ public class HistoryService {
             conn.rollback();
             e.printStackTrace();
         } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
             if (conn != null) {
                 conn.close();
             }
@@ -35,10 +38,12 @@ public class HistoryService {
         List<History> historyList = new ArrayList<>();
         String selectQuery = "SELECT * from HISTORY";
         Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         try{
             conn = DatabaseConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(selectQuery);
-            ResultSet rs = pstmt.executeQuery();
+            pstmt = conn.prepareStatement(selectQuery);
+            rs = pstmt.executeQuery();
             while (rs.next()){
                 History history = new History();
                 history.setHT_ID(rs.getInt("HT_ID"));
@@ -53,6 +58,12 @@ public class HistoryService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null) {
+                pstmt.close();
+            }
             if (conn != null) {
                 conn.close();
             }
@@ -63,10 +74,11 @@ public class HistoryService {
     public static void deleteHistory(int HT_ID) throws SQLException {
         String deleteQuery = "DELETE FROM HISTORY WHERE HT_ID = ?";
         Connection conn = null;
+        PreparedStatement pstmt = null;
         try{
             conn = DatabaseConnector.getConnection();
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement(deleteQuery);
+            pstmt = conn.prepareStatement(deleteQuery);
             pstmt.setInt(1, HT_ID);
             pstmt.executeUpdate();
             conn.commit();
@@ -74,6 +86,9 @@ public class HistoryService {
             e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
             if (conn != null) {
                 conn.close();
             }

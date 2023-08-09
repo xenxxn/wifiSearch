@@ -24,8 +24,8 @@ public class Wifi {
     private int WF_YEAR; //설치년도
     private String WF_INOUT; //실내외구분
     private String WF_ENVIRONMENT; //접속환경
-    private double WF_Y;//y좌표
-    private double WF_X; //x좌표
+    private double WF_X; //x좌표 경도 LNT
+    private double WF_Y;//y좌표 위도 LAT
     private String WF_WORK_DATE;//작업일자
     private double distance; // 거리구하기 위한 변수
 }

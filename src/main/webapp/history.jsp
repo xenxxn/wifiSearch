@@ -19,11 +19,11 @@
         <table id="wifi">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>북마크이름</th>
-                <th>순서</th>
-                <th>등록일자</th>
-                <th>비고</th>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">X좌표</th>
+                <th style="text-align: center">Y좌표</th>
+                <th style="text-align: center">조회일자</th>
+                <th style="text-align: center">비고</th>
             </tr>
             </thead>
             <tbody id="wifi_Tbody">

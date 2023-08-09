@@ -31,8 +31,13 @@
             </table>
             <br>
             <div style="text-align: center; display: block;">
-            <button type="submit">추가</button>
+            <button onclick="alertAdd()" type="submit">추가</button>
             </div>
         </form>
     </body>
 </html>
+<script>
+    function alertAdd(){
+        alert("북마크 그룹이 추가되었습니다.");
+    }
+</script>

@@ -44,6 +44,7 @@
 <script>
     function confirmDelete() {
         if (confirm("정말로 삭제하시겠습니까?")) {
+            alert("북마크 삭제가 완료되었습니다.")
             return true;
         } else {
             return false;

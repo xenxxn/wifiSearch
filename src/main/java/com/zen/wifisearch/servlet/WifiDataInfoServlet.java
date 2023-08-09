@@ -24,7 +24,11 @@ public class WifiDataInfoServlet extends HttpServlet {
         String wifi_id = request.getParameter("wifi_id");
         Wifi wifi = null;
         if (wifi_id != null) {
-            wifi = wifiInfo(wifi_id);
+            try {
+                wifi = wifiInfo(wifi_id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         List<BookmarkGroup> bookmarkGroupList = new ArrayList<>();
         try {

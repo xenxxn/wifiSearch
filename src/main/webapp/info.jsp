@@ -18,6 +18,7 @@
         <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
         <br><br>
         <form action="bookmarkAdd" method="post">
+            <input type="hidden" name="WF_ID" value="${wifi.getWF_ID()}">
             <input type="hidden" name="WF_NAME" value="${wifi.getWF_NAME()}">
             <input type="hidden" name="WF_BM_NAME" value="${wifi.getWF_NAME()}"> <!-- Add this line -->
             <label for="bookmark">북마크 그룹 선택:</label>
@@ -28,7 +29,7 @@
                     <option value="${bookmarkGroup.BG_NAME}">${bookmarkGroup.BG_NAME}</option>
                 </c:forEach>
             </select>
-            <button type="submit">북마크 추가하기</button>
+            <button type="submit" onclick="alertAdd()">북마크 추가하기</button>
         </form>
         <%
             if (request.getAttribute("wifi") == null) {
@@ -111,23 +112,12 @@
         </table>
     </body>
 </html>
-<script>
-    // wifi 정보 추출
-    var wifiInfo = {
-        xCoordinate: '<%= wifi.getWF_X() %>',
-        yCoordinate: '<%= wifi.getWF_Y() %>',
-        wifiId: '<%= wifi.getWF_ID() %>'
-    };
-
-    // 쿠키 설정
-    document.cookie = `xCoordinate=${wifiInfo.xCoordinate};`;
-    document.cookie = `yCoordinate=${wifiInfo.yCoordinate};`;
-    document.cookie = `wifiId=${wifiInfo.wifiId};`;
-
-    // 서버로 페이지 요청
-    window.onload = "http://localhost:8080/history"; // 혹은 다른 URL
-
-</script>
 <%
     }
 %>
+<script>
+    function alertAdd(){
+        alert("북마크가 추가되었습니다.");
+    }
+
+</script>

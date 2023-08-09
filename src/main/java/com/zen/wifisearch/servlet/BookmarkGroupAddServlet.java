@@ -25,8 +25,6 @@ public class BookmarkGroupAddServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("bookmarkGroupAdd.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("bookmarkGroupList");
     }
 }

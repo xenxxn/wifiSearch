@@ -21,10 +21,11 @@ public class WifiService {
 
     public static void insertWifiData() throws SQLException {
         Connection conn = null;
+        PreparedStatement pstmt = null;
         try {
             conn = DatabaseConnector.getConnection();
             JSONArray wifiDataArray = WifiAPI.getWifiAllData();
-            PreparedStatement pstmt = conn.prepareStatement(INSERT_QUERY);
+            pstmt = conn.prepareStatement(INSERT_QUERY);
             conn.setAutoCommit(false);
 
             for (Object wifiData : wifiDataArray) {
@@ -44,23 +45,23 @@ public class WifiService {
                 pstmt.setInt(11, wifi.getWF_YEAR());
                 pstmt.setString(12, wifi.getWF_INOUT());
                 pstmt.setString(13, wifi.getWF_ENVIRONMENT());
-                pstmt.setDouble(14, wifi.getWF_X());
-                pstmt.setDouble(15, wifi.getWF_Y());
+                pstmt.setDouble(14, wifi.getWF_Y());
+                pstmt.setDouble(15, wifi.getWF_X());
                 pstmt.setString(16, wifi.getWF_WORK_DATE());
                 pstmt.executeUpdate();
             }
-
             conn.commit();
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
-            try {
-                conn.rollback();
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
             }finally {
-                conn.close();
+                if(pstmt != null){
+                    pstmt.close();
+                }
+                if(conn != null) {
+                    conn.close();
+                }
             }
-        }
+
     }
 
     private static Wifi parseWifiJson(JSONObject wifiJson) {
@@ -78,18 +79,19 @@ public class WifiService {
         wifi.setWF_YEAR(Integer.parseInt((String) wifiJson.get("X_SWIFI_CNSTC_YEAR")));
         wifi.setWF_INOUT((String) wifiJson.get("X_SWIFI_INOUT_DOOR"));
         wifi.setWF_ENVIRONMENT((String) wifiJson.get("X_SWIFI_REMARS3"));
-        wifi.setWF_X(Double.parseDouble((String) wifiJson.get("LAT")));
-        wifi.setWF_Y(Double.parseDouble((String) wifiJson.get("LNT")));
+        wifi.setWF_X(Double.parseDouble((String) wifiJson.get("LNT")));
+        wifi.setWF_Y(Double.parseDouble((String) wifiJson.get("LAT")));
         wifi.setWF_WORK_DATE((String) wifiJson.get("WORK_DTTM"));
         return wifi;
     }
 
     public static void deleteWifiData() throws SQLException {
         Connection conn = null;
-        String deleteSql = "delete from wifi";
+        String deleteSql = "DELETE FROM WIFI";
+        PreparedStatement pstmt = null;
         try {
             conn = DatabaseConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(deleteSql);
+            pstmt = conn.prepareStatement(deleteSql);
             conn.setAutoCommit(false);
             pstmt.executeUpdate();
             conn.commit();
@@ -98,45 +100,60 @@ public class WifiService {
             conn.rollback();
             e.printStackTrace();
         } finally {
-            conn.close();
+            if (pstmt != null){
+                pstmt.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
         }
     }
 
     public static int selectWifiData() throws SQLException {
         int count = 0;
         Connection conn = null;
+        PreparedStatement pstmt = null;
         String selectSql = "SELECT * FROM WIFI ORDER BY ROWID LIMIT 1";
         try{
             conn = DatabaseConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(selectSql);
+             pstmt = conn.prepareStatement(selectSql);
             if (pstmt != null) {
                 count = 1;
             }
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
-            conn.close();
+            if (pstmt != null){
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return count;
     }
 
-    public static List<Wifi> selectNearbyWifiData(double latitude, double longitude) throws SQLException {
+
+    public static List<Wifi> selectNearbyWifiData(double longitude, double latitude) throws SQLException {
         List<Wifi> nearbyWifiData = new ArrayList<>();
 
         Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String nearSelectSql = "SELECT *,\n" +
-                "       (6371000 * acos(cos(radians(:latitude)) * cos(radians(WF_Y)) * cos(radians(WF_X) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(WF_Y)))) AS distance\n" +
+                "       (6371000 * acos(cos(radians(:latitude)) * cos(radians(WF_X)) * cos(radians(WF_Y) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(WF_X)))) AS distance\n" +
                 "FROM Wifi\n" +
                 "ORDER BY distance ASC\n" +
                 "LIMIT 20";
 
+
         try {
             conn = DatabaseConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(nearSelectSql);
-            pstmt.setDouble(1, latitude);
-            pstmt.setDouble(2, longitude);
+            pstmt = conn.prepareStatement(nearSelectSql);
+            pstmt.setDouble(1, longitude);
+            pstmt.setDouble(2, latitude);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
             while (rs.next()) {
                 Wifi wifi = new Wifi();
                 wifi.setWF_ID(rs.getString("WF_ID"));
@@ -163,6 +180,12 @@ public class WifiService {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null){
+                pstmt.close();
+            }
             if (conn != null) {
                 conn.close();
             }
@@ -170,15 +193,17 @@ public class WifiService {
         return nearbyWifiData;
     }
 
-    public static Wifi wifiInfo(String wifi_id) {
+    public static Wifi wifiInfo(String wifi_id) throws SQLException{
         Wifi wifi = new Wifi();
         String selectSql = "SELECT * FROM WIFI WHERE WF_ID = ?";
         Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         try {
             conn = DatabaseConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(selectSql);
+            pstmt = conn.prepareStatement(selectSql);
             pstmt.setString(1, wifi_id);
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
             if (rs.next()) {
                 wifi.setWF_ID(rs.getString("WF_ID"));
                 wifi.setWF_BOROUGH(rs.getString("WF_BOROUGH"));
@@ -203,12 +228,14 @@ public class WifiService {
             e.printStackTrace();
             wifi = null;
         } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null){
+                pstmt.close();
+            }
+            if (conn != null) {
+                conn.close();
             }
         }
         return wifi;
@@ -216,20 +243,28 @@ public class WifiService {
 
     public static String getWifiName(String WF_ID) throws SQLException {
         Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String WF_NAME = null;
         String selectQuery = "SELECT WF_NAME FROM WIFI WHERE WF_ID = ?";
         try{
             conn = DatabaseConnector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(selectQuery);
+            pstmt = conn.prepareStatement(selectQuery);
             pstmt.setString(1, WF_ID);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
             if (rs.next()){
                 WF_NAME = rs.getString("WF_NAME");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstmt != null){
+                pstmt.close();
+            }
             if (conn != null) {
                 conn.close();
             }

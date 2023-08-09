@@ -26,7 +26,7 @@ public class NearByWifiDataServlet extends HttpServlet {
 
         List<Wifi> nearbyWifiData = null;
         try {
-            nearbyWifiData = selectNearbyWifiData(latitude, longitude);
+            nearbyWifiData = selectNearbyWifiData(longitude, latitude);
         } catch (SQLException e) {
             e.printStackTrace();
         }

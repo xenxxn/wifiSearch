@@ -9,8 +9,9 @@ function getMyLocation() {
 // 위치 정보 가져오기 성공 시 실행되는 함수
 function showPosition(position) {
     var longitude = position.coords.longitude;
+    console.log(longitude);
     var latitude = position.coords.latitude;
-
+    console.log(latitude);
     // 경도와 위도를 각각의 input 요소에 입력
     $('#longitude').val(longitude);
     $('#latitude').val(latitude);
@@ -18,7 +19,7 @@ function showPosition(position) {
     // 근처 WiFi 정보 가져오기 버튼 활성화
     $('#getNearbyWifiBtn').prop('disabled', false);
 
-    sendLocation(latitude, longitude);
+    sendLocation(longitude, latitude);
 }
 
 // 위치 정보 가져오기 실패 시 실행되는 함수

@@ -35,8 +35,13 @@
                 </tbody>
             </table>
             <div style="text-align: center; display: block;">
-                <a href="../">돌아가기</a> | <button type="submit">수정</button>
+                <a href="../">돌아가기</a> | <button onclick="alertEdit()" type="submit">수정</button>
             </div>
         </form>
     </body>
 </html>
+<script>
+    function alertEdit(){
+        alert("북마크 그룹이 수정되었습니다..");
+    }
+</script>
