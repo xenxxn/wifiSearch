@@ -164,10 +164,18 @@
             }
         });
     });
-    document.getElementById("btn_getWifiData").addEventListener("click", function() {
-        var additionalLinksDiv = document.getElementById("additionalLinks");
-        additionalLinksDiv.style.display = "" +
-            "";
+</script>
+<style>
+    #additionalLinks {
+        display: none;
+    }
+</style>
+<script>
+    // JavaScript 코드
+    const getWifiDataButton = document.getElementById('btn_getWifiData');
+    const additionalLinksDiv = document.getElementById('additionalLinks');
 
+    getWifiDataButton.addEventListener('click', function() {
+        additionalLinksDiv.style.display = 'block';
     });
 </script>
