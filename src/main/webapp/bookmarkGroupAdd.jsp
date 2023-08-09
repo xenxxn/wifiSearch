@@ -16,23 +16,23 @@
         <a href="http://localhost:8080/bookmarkList">북마크 보기</a> |
         <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
         <br><br>
-            <form action="bookmarkGroupAdd" method="post">
-                <table id = "wifi">
-                    <tbody>
-                    <tr>
-                        <td class="column">북마크 이름</td>
-                        <td><input type="text" name="BG_NAME"></td>
-                    </tr>
-                    <tr>
-                        <td class="column">순서</td>
-                        <td><input type="text" name="BG_ORDER"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <br>
-                <div style="text-align: center; display: block;">
-                <button type="submit">추가</button>
-                </div>
-            </form>
+        <form action="bookmarkGroupAdd" method="post">
+            <table id = "wifi">
+                <tbody>
+                <tr>
+                    <td class="column">북마크 이름</td>
+                    <td><input type="text" name="BG_NAME"></td>
+                </tr>
+                <tr>
+                    <td class="column">순서</td>
+                    <td><input type="text" name="BG_ORDER"></td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <div style="text-align: center; display: block;">
+            <button type="submit">추가</button>
+            </div>
+        </form>
     </body>
 </html>

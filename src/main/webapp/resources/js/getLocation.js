@@ -2,19 +2,18 @@ function getMyLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        // 브라우저가 위치 정보를 지원하지 않는 경우 처리
         alert("이 브라우저는 위치 정보를 지원하지 않습니다.");
     }
 }
 
 // 위치 정보 가져오기 성공 시 실행되는 함수
 function showPosition(position) {
-    var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
+    var latitude = position.coords.latitude;
 
-    // 위도와 경도를 각각의 input 요소에 입력
-    $('#latitude').val(latitude);
+    // 경도와 위도를 각각의 input 요소에 입력
     $('#longitude').val(longitude);
+    $('#latitude').val(latitude);
 
     // 근처 WiFi 정보 가져오기 버튼 활성화
     $('#getNearbyWifiBtn').prop('disabled', false);
@@ -39,14 +38,14 @@ function showError(error) {
             break;
     }
 }
-function sendLocation(latitude, longitude) {
+function sendLocation(longitude, latitude) {
     var baseUrl = "http://localhost:8080/";
     $.ajax({
         type: "POST",
         url: baseUrl + "historyAdd",
         data: {
-            latitude: latitude,
-            longitude: longitude
+            longitude: longitude,
+            latitude: latitude
         },
         success: function(data) {
             console.log(data);

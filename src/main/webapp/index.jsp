@@ -18,13 +18,10 @@
             <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
         </div>
         <br>
-
-            LAT : <input type="text" id="latitude" name="latitude"> ,
-            LNT : <input type="text" id="longitude" name="longitude">
+            LAT : <input type="text" id="longitude" name="longitude"> ,
+            LNT : <input type="text" id="latitude" name="latitude">
             <button id="getLocationBtn">내 위치 가져오기</button>
-        <%--    아이디는 태그의 변수명(고유 key값), onclick=버튼 눌렀을때의 이벤트 --%>
             <button type="button" id="btn_getWifiData">근처 wifi 정보 가져오기</button>
-
         <table id="wifi">
             <thead>
                 <tr>
@@ -62,8 +59,8 @@
     });
 
     $('#btn_getWifiData').on('click', function (){
-        var latitude = parseFloat($("#latitude").val());
         var longitude = parseFloat($("#longitude").val());
+        var latitude = parseFloat($("#latitude").val());
         var baseUrl = "http://localhost:8080/";
 
         if(isNaN(latitude) || isNaN(longitude)) {
@@ -75,8 +72,8 @@
             type: "POST",
             url: baseUrl + "nearByWifiData",
             data: {
-                latitude: latitude,
-                longitude: longitude
+                longitude: longitude,
+                latitude: latitude
             },
             success: function(data) {
                 console.log(data);

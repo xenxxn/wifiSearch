@@ -22,7 +22,6 @@
             <input type="hidden" name="WF_BM_NAME" value="${wifi.getWF_NAME()}"> <!-- Add this line -->
             <label for="bookmark">북마크 그룹 선택:</label>
 
-
             <select name="bookmark" id="bookmark">
                 <option value="">북마크 그룹 이름 선택</option>
                 <c:forEach items="${bookmarkGroup}" var="bookmarkGroup">
@@ -33,7 +32,6 @@
         </form>
         <%
             if (request.getAttribute("wifi") == null) {
-//                out.println("<p>해당 wifi_id에 대한 정보를 찾을 수 없습니다.</p>");
             } else {
                 Wifi wifi = (Wifi) request.getAttribute("wifi");
 

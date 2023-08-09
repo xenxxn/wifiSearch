@@ -15,10 +15,10 @@ public class WifiAPI {
     public static String getWifiData(int start, int end) throws IOException, ParseException {
         String wifiDataList = "";
 
-        StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088"); /* URL */
-        urlBuilder.append("/" + URLEncoder.encode("786a754a5062756e373349746b6a4a", "UTF-8")); /* 인증키 */
-        urlBuilder.append("/" + URLEncoder.encode("json", "UTF-8")); /* 요청파일타입 */
-        urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo", "UTF-8")); /* 서비스명 */
+        StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
+        urlBuilder.append("/" + URLEncoder.encode("786a754a5062756e373349746b6a4a", "UTF-8"));
+        urlBuilder.append("/" + URLEncoder.encode("json", "UTF-8"));
+        urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo", "UTF-8"));
         urlBuilder.append("/" + URLEncoder.encode(String.valueOf(start), "UTF-8"));
         urlBuilder.append("/" + URLEncoder.encode(String.valueOf(end), "UTF-8"));
 
@@ -53,10 +53,10 @@ public class WifiAPI {
         int start = 1;
         int end = 1;
 
-        StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088"); /* URL */
-        urlBuilder.append("/" + URLEncoder.encode("786a754a5062756e373349746b6a4a", "UTF-8")); /* 인증키 */
-        urlBuilder.append("/" + URLEncoder.encode("json", "UTF-8")); /* 요청파일타입 */
-        urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo", "UTF-8")); /* 서비스명 */
+        StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
+        urlBuilder.append("/" + URLEncoder.encode("786a754a5062756e373349746b6a4a", "UTF-8"));
+        urlBuilder.append("/" + URLEncoder.encode("json", "UTF-8"));
+        urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo", "UTF-8"));
         urlBuilder.append("/" + URLEncoder.encode(String.valueOf(start), "UTF-8"));
         urlBuilder.append("/" + URLEncoder.encode(String.valueOf(end), "UTF-8"));
 

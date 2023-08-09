@@ -3,10 +3,8 @@ package com.zen.wifisearch.service;
 import com.zen.wifisearch.DatabaseConnector;
 import com.zen.wifisearch.model.Bookmark;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class BookmarkService {
@@ -14,7 +12,7 @@ public class BookmarkService {
         Connection conn = null;
         String BG_BM_NAME = BookmarkGroupService.getBookmarkGroupName(BG_NAME);
         String WF_BM_NAME = WifiService.getWifiName(WF_ID);
-        String insertQuery = "INSERT INTO bookmark (BG_BM_NAME, WF_BM_NAME, BM_RG_DATE) VALUES (?, ?, CURRENT_TIMESTAMP)";
+        String insertQuery = "INSERT INTO BOOKMARK (BG_BM_NAME, WF_BM_NAME, BM_RG_DATE) VALUES (?, ?, CURRENT_TIMESTAMP)";
 
         try {
             conn = DatabaseConnector.getConnection();

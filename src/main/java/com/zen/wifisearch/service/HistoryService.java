@@ -11,7 +11,7 @@ public class HistoryService {
     public static void insertHistory(double longitude, double latitude) throws SQLException {
         Connection conn = null;
 
-        String insertQuery = "INSERT INTO history (HT_X, HT_Y, HT_DATE) VALUES (?, ?, CURRENT_TIMESTAMP)";
+        String insertQuery = "INSERT INTO HISTORY (HT_X, HT_Y, HT_DATE) VALUES (?, ?, CURRENT_TIMESTAMP)";
 
         try{
             conn = DatabaseConnector.getConnection();
@@ -61,7 +61,7 @@ public class HistoryService {
     }
 
     public static void deleteHistory(int HT_ID) throws SQLException {
-        String deleteQuery = "DELETE FROM history WHERE HT_ID = ?";
+        String deleteQuery = "DELETE FROM HISTORY WHERE HT_ID = ?";
         Connection conn = null;
         try{
             conn = DatabaseConnector.getConnection();

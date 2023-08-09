@@ -3,11 +3,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet" href="resources/css/index.css" type="text/css">
 <html>
-<head>
-    <script type="text/javascript" src="resources/js/getLocation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>와이파이 정보 구하기</title>
-</head>
+    <head>
+        <script type="text/javascript" src="resources/js/getLocation.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <title>와이파이 정보 구하기</title>
+    </head>
     <body>
     <h1>북마크 그룹 관리</h1>
     <a href="http://localhost:8080">홈</a> |

@@ -15,8 +15,8 @@ import java.sql.SQLException;
 public class BookmarkGroupAddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setCharacterEncoding("UTF-8"); // 요청의 문자 인코딩 설정
-            response.setContentType("text/html; charset=UTF-8"); // 응답의 문자 인코딩 설정
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
 
             String BG_NAME = request.getParameter("BG_NAME");
             int BG_ORDER = Integer.parseInt(request.getParameter("BG_ORDER"));

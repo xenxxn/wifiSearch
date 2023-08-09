@@ -20,13 +20,13 @@ public class BookmarkGroupEditServlet extends HttpServlet {
         if (bgIdParam != null) {
             int BG_ID = Integer.parseInt(bgIdParam);
             try {
-                BookmarkGroup bookmarkGroup = BookmarkGroupService.getBookmarkGroupById(BG_ID); // 해당 ID의 정보를 가져오는 메소드를 가정
-                request.setAttribute("bookmarkGroup", bookmarkGroup); // JSP에 정보 전달
+                BookmarkGroup bookmarkGroup = BookmarkGroupService.getBookmarkGroupById(BG_ID);
+                request.setAttribute("bookmarkGroup", bookmarkGroup);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("bookmarkGroupEdit.jsp"); // 수정 페이지의 JSP 파일명으로 변경
+            RequestDispatcher dispatcher = request.getRequestDispatcher("bookmarkGroupEdit.jsp");
             dispatcher.forward(request, response);
         }
     }

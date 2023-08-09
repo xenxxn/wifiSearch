@@ -38,7 +38,5 @@
                 <a href="../">돌아가기</a> | <button type="submit">수정</button>
             </div>
         </form>
-
-
     </body>
 </html>

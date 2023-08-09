@@ -1,8 +1,6 @@
 package com.zen.wifisearch.servlet;
 
 import com.zen.wifisearch.model.Bookmark;
-import com.zen.wifisearch.model.BookmarkGroup;
-import com.zen.wifisearch.service.BookmarkGroupService;
 import com.zen.wifisearch.service.BookmarkService;
 
 import javax.servlet.RequestDispatcher;
@@ -21,13 +19,13 @@ public class BookmarkDeleteServlet extends HttpServlet {
         if (bmIdParam != null) {
             int BM_ID = Integer.parseInt(bmIdParam);
             try {
-                Bookmark bookmark = BookmarkService.getBookmarkInfo(BM_ID); // 해당 ID의 정보를 가져오는 메소드를 가정
+                Bookmark bookmark = BookmarkService.getBookmarkInfo(BM_ID);
                 request.setAttribute("bookmark", bookmark);
             } catch (SQLException e) {
                 e.printStackTrace();
 
             }
-            RequestDispatcher dispatcher = request.getRequestDispatcher("bookmarkDelete.jsp"); // 수정 페이지의 JSP 파일명으로 변경
+            RequestDispatcher dispatcher = request.getRequestDispatcher("bookmarkDelete.jsp");
             dispatcher.forward(request, response);
         }
     }

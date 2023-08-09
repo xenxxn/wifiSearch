@@ -15,8 +15,8 @@ import java.sql.SQLException;
 public class BookmarkAddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setCharacterEncoding("UTF-8"); // 요청의 문자 인코딩 설정
-            response.setContentType("text/html; charset=UTF-8"); // 응답의 문자 인코딩 설정
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
             String BG_BM_NAME = request.getParameter("bookmark");
             String WF_BM_NAME = request.getParameter("WF_NAME");
             BookmarkService.insertBookmark(BG_BM_NAME, WF_BM_NAME);

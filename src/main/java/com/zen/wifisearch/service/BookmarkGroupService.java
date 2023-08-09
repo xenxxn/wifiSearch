@@ -10,11 +10,10 @@ import java.util.List;
 public class BookmarkGroupService {
     public static void insertBookmarkGroup(String BG_NAME, int BG_ORDER) throws SQLException {
         Connection conn = null;
-        String insertQuery = "INSERT INTO bookmark_group (BG_NAME, BG_ORDER, BG_RG_DATE, BG_MD_DATE) " +
+        String insertQuery = "INSERT INTO BOOKMARK_GROUP (BG_NAME, BG_ORDER, BG_RG_DATE, BG_MD_DATE) " +
                 "VALUES (?, ?, CURRENT_TIMESTAMP, null)";
 
         try {
-            BookmarkGroup bg = new BookmarkGroup();
             conn = DatabaseConnector.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(insertQuery);
             pstmt.setString(1, BG_NAME);
@@ -33,7 +32,7 @@ public class BookmarkGroupService {
 
     public static void deleteBookmarkGroup(int BG_ID) throws SQLException {
         Connection conn = null;
-        String deleteQuery = "DELETE FROM bookmark_group WHERE BG_ID = ?";
+        String deleteQuery = "DELETE FROM BOOKMARK_GROUP WHERE BG_ID = ?";
         try {
             conn = DatabaseConnector.getConnection();
             conn.setAutoCommit(false);
@@ -53,7 +52,7 @@ public class BookmarkGroupService {
 
     public static void updateBookmarkGroup(int BG_ID, String BG_NAME, int BG_ORDER) throws SQLException {
         Connection conn = null;
-        String updateQuery = "UPDATE bookmark_group " +
+        String updateQuery = "UPDATE BOOKMARK_GROUP " +
                 "SET BG_NAME = ?, " +
                 "    BG_ORDER = ?, " +
                 "    BG_MD_DATE = CURRENT_TIMESTAMP " +
@@ -87,8 +86,8 @@ public class BookmarkGroupService {
         BookmarkGroup bookmarkGroup = new BookmarkGroup();
 
         try {
-            conn = DatabaseConnector.getConnection(); // 데이터베이스 연결을 얻는 방법
-            String selectQuery = "SELECT BG_ID, BG_NAME, BG_ORDER FROM bookmark_group WHERE BG_ID = ?";
+            conn = DatabaseConnector.getConnection();
+            String selectQuery = "SELECT BG_ID, BG_NAME, BG_ORDER FROM BOOKMARK_GROUP WHERE BG_ID = ?";
             pstmt = conn.prepareStatement(selectQuery);
             pstmt.setInt(1, BG_ID);
 
@@ -120,7 +119,7 @@ public class BookmarkGroupService {
     public static List<BookmarkGroup> bookmarkGroupList() throws SQLException {
         List<BookmarkGroup> bookmarkGroupList = new ArrayList<>();
         Connection conn = null;
-        String selectQuery = "SELECT * FROM bookmark_group";
+        String selectQuery = "SELECT * FROM BOOKMARK_GROUP";
         try{
             conn = DatabaseConnector.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(selectQuery);
@@ -154,7 +153,7 @@ public class BookmarkGroupService {
     public static String getBookmarkGroupName(String BG_NAME) throws SQLException {
         Connection conn = null;
 
-        String selectQuery = "SELECT BG_NAME FROM bookmark_group WHERE BG_NAME = ?";
+        String selectQuery = "SELECT BG_NAME FROM BOOKMARK_GROUP WHERE BG_NAME = ?";
         try{
             conn = DatabaseConnector.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(selectQuery);

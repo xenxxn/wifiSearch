@@ -10,33 +10,33 @@
     </head>
     <body>
         <h1>위치 히스토리 목록</h1>
-            <a href="http://localhost:8080">홈</a> |
-            <a href="http://localhost:8080/history">위치 히스토리 목록</a> |
-            <a href="confirm.jsp">OPEN API 와이파이 정보 가져오기</a>
-            <a href="http://localhost:8080/bookmarkList">북마크 보기</a> |
-            <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
-            <br>
-            <table id="wifi">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>북마크이름</th>
-                    <th>순서</th>
-                    <th>등록일자</th>
-                    <th>비고</th>
-                </tr>
-                </thead>
-                <tbody id="wifi_Tbody">
-                    <c:forEach items="${historyList}" var="historyList">
-                        <tr>
-                        <td>${historyList.HT_ID}</td>
-                        <td>${historyList.HT_X}</td>
-                        <td>${historyList.HT_Y}</td>
-                        <td>${historyList.HT_DATE}</td>
-                        <td><button onclick="confirmDelete(${historyList.HT_ID})" id="ht_id_${historyList.HT_ID}" value="${historyList.HT_ID}">삭제</button></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
+        <a href="http://localhost:8080">홈</a> |
+        <a href="http://localhost:8080/history">위치 히스토리 목록</a> |
+        <a href="confirm.jsp">OPEN API 와이파이 정보 가져오기</a>
+        <a href="http://localhost:8080/bookmarkList">북마크 보기</a> |
+        <a href="http://localhost:8080/bookmarkGroupList">북마크 그룹 관리</a>
+        <br>
+        <table id="wifi">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>북마크이름</th>
+                <th>순서</th>
+                <th>등록일자</th>
+                <th>비고</th>
+            </tr>
+            </thead>
+            <tbody id="wifi_Tbody">
+                <c:forEach items="${historyList}" var="historyList">
+                    <tr>
+                    <td>${historyList.HT_ID}</td>
+                    <td>${historyList.HT_X}</td>
+                    <td>${historyList.HT_Y}</td>
+                    <td>${historyList.HT_DATE}</td>
+                    <td><button onclick="confirmDelete(${historyList.HT_ID})" id="ht_id_${historyList.HT_ID}" value="${historyList.HT_ID}">삭제</button></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
     </body>
 </html>

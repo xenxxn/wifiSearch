@@ -1,6 +1,5 @@
 package com.zen.wifisearch.servlet;
 
-import com.zen.wifisearch.model.History;
 import com.zen.wifisearch.service.HistoryService;
 
 import javax.servlet.ServletException;
@@ -18,8 +17,8 @@ public class HistoryDeleteServlet extends HttpServlet {
             throws ServletException, IOException {
         int HT_ID = Integer.parseInt(request.getParameter("HT_ID"));
         try {
-            request.setCharacterEncoding("UTF-8"); // 요청의 문자 인코딩 설정
-            response.setContentType("text/html; charset=UTF-8"); // 응답의 문자 인코딩 설
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
 
             HistoryService.deleteHistory(HT_ID);
             System.out.println("성공");

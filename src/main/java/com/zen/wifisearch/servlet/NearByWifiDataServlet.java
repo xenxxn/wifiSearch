@@ -19,7 +19,9 @@ import static com.zen.wifisearch.service.WifiService.selectNearbyWifiData;
 @WebServlet("/nearByWifiData")
 public class NearByWifiDataServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //X좌표 경도
         double longitude = Double.parseDouble(request.getParameter("longitude"));
+        //Y좌표 위도
         double latitude = Double.parseDouble(request.getParameter("latitude"));
 
         List<Wifi> nearbyWifiData = null;
@@ -47,8 +49,8 @@ public class NearByWifiDataServlet extends HttpServlet {
                 jsonObject.put("WF_YEAR", wifi.getWF_YEAR());
                 jsonObject.put("WF_INOUT", wifi.getWF_INOUT());
                 jsonObject.put("WF_ENVIRONMENT", wifi.getWF_ENVIRONMENT());
-                jsonObject.put("WF_Y", wifi.getWF_Y());
                 jsonObject.put("WF_X", wifi.getWF_X());
+                jsonObject.put("WF_Y", wifi.getWF_Y());
                 jsonObject.put("WF_WORK_DATE", wifi.getWF_WORK_DATE());
             } catch (Exception e) {
                 e.printStackTrace();
