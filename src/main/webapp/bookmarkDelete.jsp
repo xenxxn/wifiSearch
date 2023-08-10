@@ -21,12 +21,12 @@
             <table id="wifi">
                 <tbody>
                 <tr>
-                    <td class="column">북마크 ID</td>
-                    <td><input type="text" name="BG_BM_NAME" value="${bookmark.BG_BM_NAME}" readonly></td>
+                    <td class="column">북마크 이름</td>
+                    <td><input type="text" name="BG_BM_NAME" value="${bookmark.bookmarkGroup.BG_NAME}" readonly></td>
                 </tr>
                 <tr>
-                    <td class="column">북마크 이름</td>
-                    <td><input type="text" name="WF_BM_NAME" value="${bookmark.WF_BM_NAME}" readonly></td>
+                    <td class="column">와이파이명</td>
+                    <td><input type="text" name="WF_BM_NAME" value="${bookmark.wifi.WF_NAME}" readonly></td>
                 </tr>
                 <tr>
                     <td class="column">등록일자</td>

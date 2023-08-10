@@ -19,10 +19,7 @@
         <form action="bookmarkGroupDelete" method="post" onsubmit="return confirmDelete();">
             <table id="wifi">
                 <tbody>
-                <tr>
-                    <td class="column">북마크 ID</td>
-                    <td><input type="text" name="BG_ID" value="${bookmarkGroup.BG_ID}" readonly></td>
-                </tr>
+                <input type="hidden" name="BG_ID" value="${bookmarkGroup.BG_ID}" readonly>
                 <tr>
                     <td class="column">북마크 이름</td>
                     <td><input type="text" name="BG_NAME" value="${bookmarkGroup.BG_NAME}" readonly></td>

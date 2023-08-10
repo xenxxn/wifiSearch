@@ -15,7 +15,8 @@ import java.util.Date;
 public class Bookmark {
     private int BM_ID;
     private int BG_ID;
-    private String BG_BM_NAME; //북마크그룹 FK
-    private String WF_BM_NAME; // 와이파이 FK
+    private int WF_ID;
     private Date BM_RG_DATE;
+    private Wifi wifi;
+    private BookmarkGroup bookmarkGroup;
 }

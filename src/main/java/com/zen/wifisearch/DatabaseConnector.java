@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.sql.*;
 
 public class DatabaseConnector {
-    private static final String URL = "jdbc:sqlite:C:/Users/ZEN/Desktop/제로베이스/과제/sqliteWifi.db";
+    private static final String URL = "jdbc:sqlite:identifier.sqlite";
+
     public static Connection getConnection() {
         Connection conn = null;
         ResultSet rs = null;
@@ -32,7 +33,7 @@ public class DatabaseConnector {
         }
     }
     private static ResultSet getWifiInfo(Connection connection) throws SQLException {
-        String testSql = "SELECT * FROM wifi";
+        String testSql = "SELECT * FROM WIFI";
         PreparedStatement pstmt = connection.prepareStatement(testSql);
         return pstmt.executeQuery();
     }

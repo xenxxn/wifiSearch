@@ -20,21 +20,21 @@
             <tr>
                 <th>ID</th>
                 <th>북마크이름</th>
-                <th>순서</th>
+                <th>와이파이명</th>
                 <th>등록일자</th>
                 <th>비고</th>
             </tr>
             </thead>
             <tbody id="wifi_Tbody">
-                <c:forEach items="${bookmarkList}" var="bookmarkList">
+                <c:forEach items="${bookmarkList}" var="bookmark">
                     <tr>
-                        <td>${bookmarkList.BM_ID}</td>
-                        <td>${bookmarkList.BG_BM_NAME}</td>
-                        <td>${bookmarkList.WF_BM_NAME}</td>
-                        <td>${bookmarkList.BM_RG_DATE}</td>
-                        <td><a href="bookmarkDelete?BM_ID=${bookmarkList.BM_ID}">삭제</a></td>
+                        <td>${bookmark.BM_ID}</td>
+                        <td>${bookmark.bookmarkGroup.BG_NAME}</td>
+                        <td>${bookmark.wifi.WF_NAME}</td>
+                        <td>${bookmark.BM_RG_DATE}</td>
+                        <td><a href="bookmarkDelete?BM_ID=${bookmark.BM_ID}">삭제</a></td>
                     </tr>
-            </c:forEach>
+                </c:forEach>
             </tbody>
         </table>
     </body>

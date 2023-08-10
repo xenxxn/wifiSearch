@@ -11,7 +11,7 @@ public class HistoryService {
     public static void insertHistory(double longitude, double latitude) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String insertQuery = "INSERT INTO HISTORY (HT_X, HT_Y, HT_DATE) VALUES (?, ?, CURRENT_TIMESTAMP)";
+        String insertQuery = "INSERT INTO HISTORY (HT_X, HT_Y, HT_DATE) VALUES (?, ?, DATETIME('NOW', 'LOCALTIME'))";
 
         try{
             conn = DatabaseConnector.getConnection();

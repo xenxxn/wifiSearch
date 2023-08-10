@@ -20,17 +20,17 @@
         <form action="bookmarkAdd" method="post">
             <input type="hidden" name="WF_ID" value="${wifi.getWF_ID()}">
             <input type="hidden" name="WF_NAME" value="${wifi.getWF_NAME()}">
-            <input type="hidden" name="WF_BM_NAME" value="${wifi.getWF_NAME()}"> <!-- Add this line -->
             <label for="bookmark">북마크 그룹 선택:</label>
 
             <select name="bookmark" id="bookmark">
                 <option value="">북마크 그룹 이름 선택</option>
                 <c:forEach items="${bookmarkGroup}" var="bookmarkGroup">
-                    <option value="${bookmarkGroup.BG_NAME}">${bookmarkGroup.BG_NAME}</option>
+                    <option value="${bookmarkGroup.BG_ID}">${bookmarkGroup.BG_NAME}</option> <!-- Change value to BG_ID -->
                 </c:forEach>
             </select>
             <button type="submit" onclick="alertAdd()">북마크 추가하기</button>
         </form>
+
         <%
             if (request.getAttribute("wifi") == null) {
             } else {
