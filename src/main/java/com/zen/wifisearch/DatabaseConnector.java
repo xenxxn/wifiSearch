@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class DatabaseConnector {
+
     private static final String URL = "jdbc:sqlite:C:/Users/ZEN/Desktop/제로베이스/과제/wifiSearch/identifier.sqlite";
 
     public static Connection getConnection() {
